@@ -15,6 +15,7 @@ const createTable = (parentElement) => {
         add: (row) => {
             data.push(row);
             data.sort((a, b) => b[1] - a[1]);
+            table.render()
         },
         render: () => {
             let htmlTable = `<table class ="table table-hover"><thead><tr><th>Squadra</th><th>Punti</th></tr></thead><tbody>`;
@@ -38,12 +39,14 @@ const createForm = (parentElement) => {
         render: () => {
             parentElement.innerHTML =
                 data.map((name, index) => {
-                    return `<div>` + name[0] + `\n<input id="` + name[1] + `" type="` + name[2] + `" /></div>`;
+                    return `<div class="form-label">` + name[0] + `\n<input class ="form-control" id="` + name[1] + `" type="` + name[2] + `" /></div>`;
                 }).join('\n')
-                + "<button type='button' id='submit'>Submit</button>";
+                + `<button type='button' class="btn btn-success" id='submit'>Submit</button>`;
             document.querySelector("#submit").onclick = () => {
                 const result = data.map((name) => {
-                    return document.querySelector("#" + name[1]).value;
+                    const value = document.querySelector("#" + name[1]).value;
+                    document.querySelector("#" + name[1]).value = "";
+                    return value;
                 });
                 callback(result);
             }
