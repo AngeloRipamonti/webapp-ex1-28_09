@@ -51,16 +51,9 @@ const createForm = (parentElement) => {
     };
 };
 
-const form = createForm(document.querySelector('#app'));
+const form = createForm(document.querySelector('#formDiv'));
+const table = createTable(document.querySelector("#tableDiv"));
 form.setLabels([["Nome Squadra", "namesq", "text"], ["Punti", "punti", "number"]]);
-form.onsubmit(console.log);
+form.onsubmit(table.add);
 form.render();
-
-/*
-const table = createTable(document.querySelector("#app"));
-table.add(["Torino", 11]);
-table.add(["Napoli", 10]);
-table.add(["Udinese", 10]);
-table.add(["Milan", 15]);
-table.add(["Inter", 5]);
-table.render();*/
+table.render()
