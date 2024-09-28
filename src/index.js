@@ -31,30 +31,30 @@ const createTable = (parentElement) => {
 const createForm = (parentElement) => {
     let data;
     let callback = null;
-  
-    return {  
-      setLabels: (labels) => { data = labels; },  
-      onsubmit: (callbackInput) => { callback = callbackInput},
-      render: () => { 
-        parentElement.innerHTML = 
-          data.map((name, index) => {
-              return `<div>`+name+`\n<input id="`+name+`" type="text" /></div>`;
-            }).join('\n')
-            + "<button type='button' id='submit'>Submit</button>";  
-        document.querySelector("#submit").onclick = () => {
-          const result = data.map((name) => {
-            return document.querySelector("#" + name).value;
-          });
-          callback(result);
-        }          
-      },
+
+    return {
+        setLabels: (labels) => { data = labels; },
+        onsubmit: (callbackInput) => { callback = callbackInput },
+        render: () => {
+            parentElement.innerHTML =
+                data.map((name, index) => {
+                    return `<div>` + name[0] + `\n<input id="` + name[1] + `" type="` + name[2] + `" /></div>`;
+                }).join('\n')
+                + "<button type='button' id='submit'>Submit</button>";
+            document.querySelector("#submit").onclick = () => {
+                const result = data.map((name) => {
+                    return document.querySelector("#" + name[1]).value;
+                });
+                callback(result);
+            }
+        },
     };
-  };
-  
-  const form = createForm(document.querySelector('#app'));
-  form.setLabels(["Nome", "Punti"]);
-  form.onsubmit(console.log);
-  form.render();
+};
+
+const form = createForm(document.querySelector('#app'));
+form.setLabels([["Nome Squadra", "namesq", "text"], ["Punti", "punti", "number"]]);
+form.onsubmit(console.log);
+form.render();
 
 /*
 const table = createTable(document.querySelector("#app"));
