@@ -56,7 +56,17 @@ const createForm = (parentElement) => {
 
 const form = createForm(document.querySelector('#formDiv'));
 const table = createTable(document.querySelector("#tableDiv"));
-form.setLabels([["Nome Squadra", "namesq", "text"], ["Punti", "punti", "number"]]);
-form.onsubmit(table.add);
-form.render();
-table.render()
+const pro = new Promise((resolve, reject) => {
+    try{
+        form.setLabels([["Nome Squadra", "namesq", "text"], ["Punti", "punti", "number"]]);
+        form.onsubmit(table.add);
+        form.render();
+        table.render()
+        resolve("Operazione completata");
+    }
+    catch(error){
+        reject(error);
+    }
+})
+
+pro.then(v => console.log(v)).catch(e => console.log(e));
