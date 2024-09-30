@@ -22,10 +22,15 @@ const createTable = (parentElement) => {
             htmlTable += data.map((row) =>
                 "<tr>" + row.map((col) =>
                     "<td>" + col + "</td>"
-                ).join("")
-            ).join("") + "</tr>";
+                ).join("") + `<td><button type="button" class="btn btn-danger">X</button></td>`
+            ).join("") + `</tr>`;
             htmlTable += "</tbody></table";
             parentElement.innerHTML = htmlTable;
+
+            document.querySelectorAll(".btn-danger").forEach((button,index) => button.onclick = () => {
+                data.splice(index,1);
+                table.render();
+            })
         }
     }
 }
